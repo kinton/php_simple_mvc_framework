@@ -1,0 +1,3 @@
+Options ExecCGI FollowSymLinks Includes MultiViews
+RewriteEngine on
+RewriteRule ^admin/products/([^/]+)/?$ admin/products?pr=$1

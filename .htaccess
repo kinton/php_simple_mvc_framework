@@ -1,0 +1,24 @@
+RewriteEngine On
+
+#переходим на https://
+RewriteCond %{HTTPS} =off 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
+
+#убираем www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+#location / {
+#  rewrite ^(.*)$ https://$http_host$request_uri redirect;
+#  if ($http_host ~* "^www\.(.*)$"){
+#    rewrite ^(.*)$ https://%1/$1 redirect;
+#  }
+#  if (!-e $request_filename){
+#    rewrite ^(.+)$ /index.php?url=$1 break;
+#  }
+#}
